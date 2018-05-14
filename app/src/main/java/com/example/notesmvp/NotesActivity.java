@@ -1,19 +1,59 @@
 package com.example.notesmvp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class NotesActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+import com.example.notesmvp.adapter.NotesAdapter;
+import com.example.notesmvp.data.db.model.Note;
+import com.example.notesmvp.ui.NotesPresenter;
+import com.example.notesmvp.ui.base.BaseActivity;
+import com.example.notesmvp.ui.base.NotesContract;
+
+import java.util.ArrayList;
+
+public class NotesActivity extends BaseActivity implements NotesAdapter.OnItemClickListener, NotesContract.View {
+
     private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private NotesPresenter presenter;
+    private TextView tvNotasVacio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.tbNotesActivity);
-        setSupportActionBar(toolbar);
+        tvNotasVacio = findViewById(R.id.tvNotasEmpty);
+        recyclerView = findViewById(R.id.rvListNotes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new NotesAdapter(this);
+        recyclerView.setAdapter(adapter);
+        presenter = new NotesPresenter(this);
+        presenter.loadNotes();
+
+    }
+
+    @Override
+    public void onItemCLick(Note note) {
+        Toast.makeText(this, "Nota pulsada: "+note.getTitle(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNotes(ArrayList<Note> notes) {
+        adapter = new NotesAdapter(this, notes);
+        recyclerView.setAdapter(adapter);
+        toogleEmptyNotes();
+    }
+
+    private void toogleEmptyNotes() {
+        if (adapter.getItemCount() > 0){
+            tvNotasVacio.setVisibility(View.INVISIBLE);
+        }else{
+            tvNotasVacio.setVisibility(View.VISIBLE);
+        }
     }
 }
