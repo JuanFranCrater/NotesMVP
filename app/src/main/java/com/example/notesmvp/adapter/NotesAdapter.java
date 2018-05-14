@@ -39,7 +39,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
     @Override
     public void onBindViewHolder(NotesHolder holder, int position) {
         holder.title.setText(noteArrayList.get(position).getTitle());
-        holder.title.setText(noteArrayList.get(position).getTime());
+        holder.timeStamp.setText(noteArrayList.get(position).getTime());
         holder.bind(noteArrayList.get(position), listener);
     }
 
