@@ -28,6 +28,8 @@ public final class NoteContract {
 
         public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS %s", TABLE_NAME);
 
+
+
         //Hacer con fecha como date
         //public static final String CREATE = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s DATE DEFAULT(datetime)");
     }

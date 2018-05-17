@@ -1,5 +1,6 @@
 package com.example.notesmvp.data.db.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -26,5 +27,20 @@ public class NoteDao {
         NotesOpenHelper.getInstance().closeDatabase();
 
         return aux;
+    }
+
+    //Metodo que añade una nota a la base de datos.
+    public long addNote(String titulo, String fecha){
+        SQLiteDatabase sqLiteDatabase = NotesOpenHelper.getInstance().openDatabase();
+        ContentValues values = new ContentValues();
+        long id;
+
+        values.put(NoteContract.NoteEntry.COLUMN_TITLE, titulo);
+        values.put(NoteContract.NoteEntry.COLUMN_TIMESTAMP, fecha);
+
+        id = sqLiteDatabase.insert(NoteContract.NoteEntry.TABLE_NAME, null, values);
+        NotesOpenHelper.getInstance().closeDatabase();
+
+        return id;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.notesmvp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 import com.example.notesmvp.adapter.NotesAdapter;
 import com.example.notesmvp.data.db.model.Note;
 import com.example.notesmvp.ui.NotesPresenter;
+import com.example.notesmvp.ui.add.NotesAddActivity;
 import com.example.notesmvp.ui.base.BaseActivity;
 import com.example.notesmvp.ui.base.NotesContract;
 
@@ -21,6 +24,7 @@ public class NotesActivity extends BaseActivity implements NotesAdapter.OnItemCl
     private RecyclerView.Adapter adapter;
     private NotesPresenter presenter;
     private TextView tvNotasVacio;
+    private FloatingActionButton fabAddNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,15 @@ public class NotesActivity extends BaseActivity implements NotesAdapter.OnItemCl
         recyclerView.setAdapter(adapter);
         presenter = new NotesPresenter(this);
         presenter.loadNotes();
+
+        fabAddNotes = findViewById(R.id.fabMainActivity);
+        fabAddNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotesActivity.this, NotesAddActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

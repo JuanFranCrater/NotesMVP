@@ -23,4 +23,8 @@ public class NoteRepository {
     public ArrayList<Note> getNotes() {
         return noteDao.loadAll();
     }
+
+    public long addNote(String titulo, String fecha){
+            return noteDao.addNote(titulo, fecha);
+    }
 }
