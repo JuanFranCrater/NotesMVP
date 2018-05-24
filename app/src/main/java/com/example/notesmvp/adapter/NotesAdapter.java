@@ -18,6 +18,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
     public interface OnItemClickListener{
         void onItemCLick(Note note);
         void onLongClick(Note note);
+
     }
 
     public NotesAdapter(NotesAdapter.OnItemClickListener listener) {
@@ -66,6 +67,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
                     listener.onItemCLick(note);
                 }
             });
+
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {

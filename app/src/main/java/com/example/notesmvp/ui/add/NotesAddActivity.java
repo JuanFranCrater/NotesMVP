@@ -21,7 +21,10 @@ public class NotesAddActivity extends AppCompatActivity implements AddContract.V
     private EditText etTituloNota;
     private EditText etFechaNota;
 
+<<<<<<< HEAD
     //La toolbar se referencia en base
+=======
+>>>>>>> 916f74eb31d36afd9d3979e93abc706bc3b3b0fe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
